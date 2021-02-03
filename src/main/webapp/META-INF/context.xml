@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context path="${config.context_root}">
+   
+   <Resource name="mongodb/iotcloudDB"
+          auth="Container"
+          type="com.mongodb.MongoClient"
+          closeMethod="close"
+          factory="com.mongodb.client.jndi.MongoClientFactory"
+          singleton="true"
+          connectionString="mongodb://localhost:27017/test"/>
+          
+</Context>

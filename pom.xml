@@ -1,0 +1,212 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	 
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>qworks.dataserver</groupId>
+	<artifactId>dataserver</artifactId>
+	<version>0.0.1</version>
+	<packaging>war</packaging>
+	<name>RestServiceJWT</name>
+ 	
+  	<properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        
+        <org.jboss.resteasy.version>3.1.4.Final</org.jboss.resteasy.version>
+        <weld.version>3.1.1.Final</weld.version>
+        <aws-java-sdk.version>1.11.580</aws-java-sdk.version>
+        <iotdatamodel.version>0.5.2</iotdatamodel.version>
+        <mapstruct.version>1.4.1.Final</mapstruct.version>
+		<morphia.version>1.5.8</morphia.version>
+        <mongo-java-driver.version>3.10.0</mongo-java-driver.version>
+        <shiro.version>1.4.1</shiro.version>
+        <jjwt.version>0.7.0</jjwt.version>
+        <slf4j.version>1.7.25</slf4j.version>
+		<logback.version>1.2.3</logback.version>
+		<junit.version>4.12</junit.version>
+		
+		
+		<config.mongo.dbname>iotcloud</config.mongo.dbname>
+		<config.aws.region>eu-west-2</config.aws.region>
+		<config.aws.account>512149945468</config.aws.account>
+		<config.aws.profile>iotmanager</config.aws.profile>
+		<config.aws.cognito.pool_id>eu-west-2_Q2lLWyahq</config.aws.cognito.pool_id>
+		<config.aws.cognito.app_client_id>b5cdqcje1efu8be6nke5seq8i</config.aws.cognito.app_client_id>
+		  		
+		
+    </properties>
+
+    <dependencies>
+        
+        <!--  -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>4.0.0</version>
+            <scope>provided</scope>
+        </dependency>       
+        
+        <!-- 
+        <dependency>
+		    <groupId>javax.ws.rs</groupId>
+		    <artifactId>javax.ws.rs-api</artifactId>
+		    <version>2.0.1</version>
+		    <scope>provided</scope>
+		</dependency>
+	    -->
+	    
+        <!-- Set up RESTEasy-->
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-jaxrs</artifactId>
+			<version>${org.jboss.resteasy.version}</version>
+			<!-- <scope>runtime</scope>  -->
+        </dependency>
+        
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jaxb-provider</artifactId>
+			<version>${org.jboss.resteasy.version}</version>
+		</dependency>
+        
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-servlet-initializer</artifactId>
+            <version>${org.jboss.resteasy.version}</version>
+			<!-- <scope>runtime</scope> -->
+        </dependency>    
+           
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-jackson-provider</artifactId>
+            <version>${org.jboss.resteasy.version}</version>
+			<!-- <scope>runtime</scope> -->
+        </dependency>          
+                    
+        <dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-client</artifactId>
+			<version>${org.jboss.resteasy.version}</version>
+		</dependency>
+       
+        <!-- CDI  -->
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-cdi</artifactId>
+            <version>${org.jboss.resteasy.version}</version>
+		</dependency>       
+        
+        <dependency>
+            <groupId>org.jboss.weld.servlet</groupId>
+            <artifactId>weld-servlet-shaded</artifactId>
+            <version>${weld.version}</version>
+        </dependency>          
+                     
+        <!-- Database  -->
+		<dependency>
+			<groupId>dev.morphia.morphia</groupId>
+			<artifactId>core</artifactId>
+			<version>${morphia.version}</version>
+		</dependency>
+		
+        <!-- Security -->
+         <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-core</artifactId>
+            <version>${shiro.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-web</artifactId>
+            <version>${shiro.version}</version>
+        </dependency>
+		
+        <dependency>
+		    <groupId>org.apache.shiro</groupId>
+		    <artifactId>shiro-servlet-plugin</artifactId>
+		    <version>${shiro.version}</version>
+		</dependency>
+		 
+		<dependency>
+		    <groupId>org.apache.shiro</groupId>
+		    <artifactId>shiro-jaxrs</artifactId>
+		    <version>${shiro.version}</version>
+		</dependency>
+		
+		<dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>${jjwt.version}</version>
+        </dependency>
+        
+        <!--  -->
+        <dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-java-sdk-cognitoidp</artifactId>
+			<version>${aws-java-sdk.version}</version>
+		</dependency>
+        
+		
+        <!-- Logging frameworks -->
+        <dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+			
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>${logback.version}</version>
+		</dependency>
+        
+        <!-- TEST -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+        
+    </dependencies>
+    
+    <build>
+    
+    	<resources>
+			<resource>
+			   <directory>src/main/resources</directory>
+			   <filtering>true</filtering>
+			</resource>
+		</resources>
+		
+		<testResources>
+            <testResource>
+                <directory>src/test/resources</directory>
+                <filtering>true</filtering>
+            </testResource>
+        </testResources>
+        
+        <plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>properties-maven-plugin</artifactId>
+				<version>1.0.0</version>
+				<executions>
+					<execution>
+						<phase>initialize</phase>
+						<goals>
+							<goal>read-project-properties</goal>
+						</goals>
+						<configuration>
+							<files>
+								<file>${basedir}/custom-config.properties</file>
+							</files>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>        
+        </plugins>
+    
+    </build>    
+</project>
